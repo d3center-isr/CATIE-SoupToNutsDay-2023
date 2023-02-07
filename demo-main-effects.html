@@ -261,7 +261,7 @@ Main effect using full sample     0.50    0.04    0.95 0.23    0.03</code></pre>
 <span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="co">#    show how one might specify the arguments of geem in a way that is</span></span>
 <span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="co">#    applicable to a wide variety of scenarios.</span></span>
 <span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">geem</span>(Y2 <span class="sc">~</span> A1, </span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">geem</span>(Y2 <span class="sc">~</span> A2, </span>
 <span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>              <span class="at">id =</span> ID, </span>
 <span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> dat_smart <span class="sc">%&gt;%</span> <span class="fu">filter</span>(R<span class="sc">==</span><span class="dv">0</span>), </span>
 <span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>              <span class="at">sandwich =</span> <span class="cn">TRUE</span>, </span>
@@ -271,12 +271,12 @@ Main effect using full sample     0.50    0.04    0.95 0.23    0.03</code></pre>
 <span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            Estimates Model SE Robust SE   wald      p
-(Intercept)    2.9280   0.1468    0.1452 20.170 0.0000
-A1             0.2103   0.1468    0.1452  1.449 0.1475
+(Intercept)    2.9280   0.1472    0.1456 20.110 0.0000
+A2            -0.1822   0.1472    0.1456 -1.252 0.2107
 
  Estimated Correlation Parameter:  0 
  Correlation Structure:  independence 
- Est. Scale Parameter:  7.928 
+ Est. Scale Parameter:  7.973 
 
  Number of GEE iterations: 2 
  Number of Clusters:  92    Maximum Cluster Size:  1 
@@ -294,9 +294,9 @@ A1             0.2103   0.1468    0.1452  1.449 0.1475
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(est_contrasts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                                      Estimate 95% LCL 95% UCL   SE p-value
-End-of-study mean: a2 = INTENSIFY         3.14    2.70    3.58 0.22    0.00
-End-of-study mean: a2 = AUGMENT           2.72    2.36    3.08 0.18    0.00
-Main effect among non-responders only     0.42   -0.15    0.99 0.29    0.15</code></pre>
+End-of-study mean: a2 = INTENSIFY         2.75    2.33    3.16 0.21    0.00
+End-of-study mean: a2 = AUGMENT           3.11    2.72    3.50 0.20    0.00
+Main effect among non-responders only    -0.36   -0.94    0.21 0.29    0.21</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -- The next line is only necessary because we would like to plot</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#    estimates from all the analyses side-by-side</span></span>

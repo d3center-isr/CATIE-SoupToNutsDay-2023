@@ -135,7 +135,7 @@ dat_smart <- dat_smart %>% mutate(design_weights = 2*R + 4*(1-R))
 #    show how one might specify the arguments of geem in a way that is
 #    applicable to a wide variety of scenarios.
 
-model <- geem(Y2 ~ A1, 
+model <- geem(Y2 ~ A2, 
               id = ID, 
               data = dat_smart %>% filter(R==0), 
               sandwich = TRUE, 
@@ -204,7 +204,6 @@ g <- g + annotate("point", x = c(1,2), y = dat_plot1[["estimate"]], size = 8, co
 g1 <- g
 ```
 
-
 ```{r}
 #| message: false
 #| warning: false
@@ -261,4 +260,3 @@ library(gridExtra)
 # -- Reveal plot
 grid.arrange(g1, g2, nrow = 1)
 ```
-

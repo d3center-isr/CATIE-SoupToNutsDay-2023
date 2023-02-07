@@ -1,0 +1,124 @@
+---
+title: "CATIE Soup to Nuts Day"
+author: "Primary Data Analytics: Workflows and R code"
+
+title-slide-attributes: 
+  data-background-image: d3c_Logo.png
+  data-background-size: 25%
+  data-background-position: 85% 85%
+
+format: 
+  revealjs: 
+    footer: March 2023
+---
+
+
+## Comparing first-stage intervention options
+
+Let's dissect this code line-by-line.
+
+``` {r}
+#| echo: true
+#| eval: FALSE
+
+library(geeM)
+
+# -- Step 1: Estimate parameters of our model
+model <- geem(Y2 ~ A1, id = ID, data = dat_smart, sandwich = TRUE)
+
+summary(model)
+
+# -- Step 2: Estimate end-of-study outcome means under each
+#            first-stage intervention and 
+#            the main effect of first-stage intervention
+L <- rbind("End-of-study mean: a1 = BMOD"   = c(1,  1),
+           "End-of-study mean: a1 = MED"    = c(1, -1),
+           "Main effect using full sample" = c(0,  2))
+
+est_contrasts <- estimate(model, L)
+
+print(est_contrasts)
+```
+
+
+## Comparing first-stage intervention options
+
+``` {r, `code-line-numbers` = "4"}
+#| echo: true
+#| eval: FALSE
+
+library(geeM)
+
+# -- Step 1: Estimate parameters of our model
+model <- geem(Y2 ~ A1, id = ID, data = dat_smart, sandwich = TRUE)
+
+summary(model)
+
+# -- Step 2: Estimate end-of-study outcome means under each
+#            first-stage intervention and 
+#            the main effect of first-stage intervention
+L <- rbind("End-of-study mean: a1 = BMOD"   = c(1,  1),
+           "End-of-study mean: a1 = MED"    = c(1, -1),
+           "Main effect using full sample" = c(0,  2))
+
+est_contrasts <- estimate(model, L)
+
+print(est_contrasts)
+```
+
+::: notes
+The Comparing first-stage intervention options is simple.
+:::
+
+
+## Comparing first-stage intervention options
+
+``` {r, `code-line-numbers` = "11-13"}
+#| echo: true
+#| eval: FALSE
+
+library(geeM)
+
+# -- Step 1: Estimate parameters of our model
+model <- geem(Y2 ~ A1, id = ID, data = dat_smart, sandwich = TRUE)
+
+summary(model)
+
+# -- Step 2: Estimate end-of-study outcome means under each
+#            first-stage intervention and 
+#            the main effect of first-stage intervention
+L <- rbind("End-of-study mean: a1 = BMOD"   = c(1,  1),
+           "End-of-study mean: a1 = MED"    = c(1, -1),
+           "Main effect using full sample" = c(0,  2))
+
+est_contrasts <- estimate(model, L)
+
+print(est_contrasts)
+```
+
+## Comparing first-stage intervention options
+
+``` {r, `code-line-numbers` = "15"}
+#| echo: true
+#| eval: FALSE
+
+library(geeM)
+
+# -- Step 1: Estimate parameters of our model
+model <- geem(Y2 ~ A1, id = ID, data = dat_smart, sandwich = TRUE)
+
+summary(model)
+
+# -- Step 2: Estimate end-of-study outcome means under each
+#            first-stage intervention and 
+#            the main effect of first-stage intervention
+L <- rbind("End-of-study mean: a1 = BMOD"   = c(1,  1),
+           "End-of-study mean: a1 = MED"    = c(1, -1),
+           "Main effect using full sample" = c(0,  2))
+
+est_contrasts <- estimate(model, L)
+
+print(est_contrasts)
+```
+
+

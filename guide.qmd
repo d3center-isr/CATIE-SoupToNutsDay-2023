@@ -1,20 +1,32 @@
 ---
-title: "CATIE-SoupToNutsDay-2023"
+title: "Guide to CATIE Soup-to-Nuts Day 2023"
+output: html
+title-block-banner: TRUE
 ---
 
-## Quarto
+::: column-screen
+The following is the order that will be used to present each part of the **CATIE Soup-to-Nuts Day 2023** material when the workshop *goes live*.
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+| Order  | Time        | Topic                                           | Slides    | Markdown File             | HTML File                  |
+|------------|------------|------------|------------|------------|------------|
+| 1      | 5 mins      | Review prototypical SMART design                | XX-XX     | \--                       | \--                        |
+| **2**  | **10 mins** | **Begin demo: main effects comparison**         | **XX-XX** | `demo-main-effects.qmd`   | `demo-main-effects.html`   |
+| **3**  | **10 mins** | **Begin demo: comparing AI's**                  | **XX-XX** | `demo-AI-comparison.qmd`  | `demo-AI-comparison.html`  |
+| 4      | 2.5 mins    | Introduce practicum prompt #1                   | XX-XX     | \--                       | \--                        |
+| **5**  | **5 mins**  | **Hands On: Participants work independently**   | **XX-XX** | `demo-AI-comparison.qmd`  | \--                        |
+| 6      | 2.5 mins    | Reveal practicum prompt #1 solutions            | XX-XX     | \--                       | \--                        |
+| 7      | 5 mins      | Introduce practicum prompt #2                   | XX-XX     | `practicum-prompt.qmd`    | \--                        |
+| **8**  | **25 mins** | **Hands On: Participants work in small groups** | **XX-XX** | \--                       | \--                        |
+| 9      | 15 mins     | Reveal practicum prompt #2 solutions            | XX-XX     | `practicum-solutions.qmd` | `practicum-solutions.html` |
+| **10** | **25 mins** | **Open floor for Q&A**                          | **XX-XX** | \--                       | \--                        |
 
-```{r}
+In total, we will have approximately have the following time allocations for each activity type:
 
-```
-
-| Col1 | Col2 | Col3 |
-|------|------|------|
-|      |      |      |
-|      |      |      |
-|      |      |      |
-
-```{1 + 1}
-```
+| Activity Type                                                      | Total Time         |
+|-----------------------------------------------------|-------------------|
+| **Didactic: Demos**                                                | **20 mins**        |
+| Didactic: Provide scaffolding for hands on segment, intros, review | 30 mins            |
+| **Hands On**                                                       | **30 mins**        |
+| **Open floor for Q&A**                                             | **25 mins**        |
+| Grand Total Time                                                   | 1 hour and 45 mins |
+:::
