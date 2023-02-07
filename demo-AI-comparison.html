@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Module 4 / DEMO 2: Comparing Adaptive Interventions</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="demo-AI-comparison_files/libs/clipboard/clipboard.min.js"></script>
+<script src="demo-AI-comparison_files/libs/quarto-html/quarto.js"></script>
+<script src="demo-AI-comparison_files/libs/quarto-html/popper.min.js"></script>
+<script src="demo-AI-comparison_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="demo-AI-comparison_files/libs/quarto-html/anchor.min.js"></script>
+<link href="demo-AI-comparison_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="demo-AI-comparison_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="demo-AI-comparison_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="demo-AI-comparison_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="demo-AI-comparison_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Module 4 / DEMO 2: Comparing Adaptive Interventions</h1>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="data-analysis-helper-functions" class="level1">
+<h1>Data Analysis / HELPER FUNCTIONS</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>estimate <span class="ot">&lt;-</span> <span class="cf">function</span>(fit, combos) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -- Details about function inputs</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#    fit:</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">#           must be of class 'geem' (obtained from geeM package)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#    combos: </span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#           must be of class 'matrix'</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#           specifies linear combinations of parameter estimates</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -- Compute the mean estimate</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  est <span class="ot">&lt;-</span> combos <span class="sc">%*%</span> <span class="fu">as.matrix</span>(fit<span class="sc">$</span>beta)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -- Get the appropriate variance estimate</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  var <span class="ot">&lt;-</span> fit<span class="sc">$</span>var</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -- Compute standard error of mean estimate and confidence bounds</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  se.est <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">diag</span>(combos <span class="sc">%*%</span> var <span class="sc">%*%</span> <span class="fu">t</span>(combos)))</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  lcl <span class="ot">&lt;-</span> est <span class="sc">-</span> se.est <span class="sc">*</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  ucl <span class="ot">&lt;-</span> est <span class="sc">+</span> se.est <span class="sc">*</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -- Perform a 1-degree-of-freedom Wald test on the estimate</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  pvalue <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>((est<span class="sc">/</span>se.est)<span class="sc">^</span><span class="dv">2</span>, <span class="at">df =</span> <span class="dv">1</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -- Combine and format output</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">cbind</span>(est, lcl, ucl, se.est, pvalue)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(out) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(combos)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Estimate"</span>, <span class="st">"95% LCL"</span>, <span class="st">"95% UCL"</span>, <span class="st">"SE"</span>, <span class="st">"p-value"</span>)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">round</span>(out, <span class="dv">2</span>)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -- Output is a rough equivalent of SAS PROC GENMOD's ESTIMATE statement</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(out)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data-analysis-demo-workflow" class="level1">
+<h1>Data Analysis / DEMO WORKFLOW</h1>
+<section id="load-data-and-understand-relationships-between-variables-in-the-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="load-data-and-understand-relationships-between-variables-in-the-dataset">Load data and understand relationships between variables in the dataset</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Load package for plotting</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Load package for data cleaning</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Load package containing simulated data and documentation</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(CATIE2023)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>dat_smart <span class="ot">&lt;-</span> CATIE2023<span class="sc">::</span>adhd</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Baseline covariates need to be centered to facilitate interpretability</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#    of models should we choose to specify a model that adjusts for </span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#    baseline covariates</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Create centered baseline covariates here.</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">#    severity is already centered, according to the documentation.</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">#    So, we just need to rename to reflect the fact that it's already centered.</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">#    priormed, race, and Y0 have not yet been centered.</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co">#    We suffix the names of the centered variables by "_c".</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>dat_smart <span class="ot">&lt;-</span> dat_smart <span class="sc">%&gt;%</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">severity_c =</span> severity) <span class="sc">%&gt;%</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">priormed_c =</span> priormed <span class="sc">-</span> <span class="fu">mean</span>(priormed),</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>         <span class="at">odd_c =</span> odd <span class="sc">-</span> <span class="fu">mean</span>(odd),</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>         <span class="at">race_c =</span> race <span class="sc">-</span> <span class="fu">mean</span>(race),</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>         <span class="at">Y0_c =</span> Y0 <span class="sc">-</span> <span class="fu">mean</span>(Y0))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="explore-association-between-binary-baseline-covariate-and-continuous-end-of-study-outcome" class="level3">
+<h3 class="anchored" data-anchor-id="explore-association-between-binary-baseline-covariate-and-continuous-end-of-study-outcome">Explore association between <em>binary</em> baseline covariate and <em>continuous</em> end-of-study outcome</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">cor</span>(dat_smart<span class="sc">$</span>priormed, dat_smart<span class="sc">$</span>Y2)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">round</span>(u, <span class="dv">2</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>mean_by_group <span class="ot">&lt;-</span> dat_smart <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(priormed) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">mY2 =</span> <span class="fu">mean</span>(Y2))</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>mY2 <span class="ot">&lt;-</span> mean_by_group[[<span class="st">"mY2"</span>]]</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>mY2 <span class="ot">&lt;-</span> <span class="fu">round</span>(mY2, <span class="dv">2</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> dat_smart, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(priormed), <span class="at">y =</span> Y2))</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">scale_x_discrete</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"no"</span>, <span class="st">"yes"</span>))</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">ylim</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">7</span>) <span class="sc">+</span> <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>))</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Whether the child received medication prior to first-stage intervention"</span>, <span class="at">y =</span> <span class="st">"Y2"</span>) </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Association between prior medication and end-of-study outcome"</span>) </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_violin</span>() <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">0.75</span>, <span class="at">xend =</span> <span class="fl">1.25</span>, <span class="at">y =</span> mY2[<span class="dv">1</span>], <span class="at">yend =</span> mY2[<span class="dv">1</span>], <span class="at">colour =</span> <span class="st">"brown"</span>,<span class="at">linewidth =</span> <span class="dv">2</span>)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">1.75</span>, <span class="at">xend =</span> <span class="fl">2.25</span>, <span class="at">y =</span> mY2[<span class="dv">2</span>], <span class="at">yend =</span> mY2[<span class="dv">2</span>], <span class="at">colour =</span> <span class="st">"brown"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">1.25</span>, <span class="at">y =</span> mY2[<span class="dv">1</span>] <span class="sc">-</span> <span class="fl">0.25</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"overall mean: "</span>, mY2[<span class="dv">1</span>], <span class="at">sep=</span><span class="st">""</span>), <span class="at">colour =</span> <span class="st">"brown"</span>, <span class="at">size =</span> <span class="dv">3</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">1.75</span>, <span class="at">y =</span> mY2[<span class="dv">2</span>] <span class="sc">-</span> <span class="fl">0.25</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"overall mean: "</span>, mY2[<span class="dv">2</span>], <span class="at">sep=</span><span class="st">""</span>), <span class="at">colour =</span> <span class="st">"brown"</span>, <span class="at">size =</span> <span class="dv">3</span>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> <span class="sc">-</span><span class="dv">2</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"Pearson Correlation:"</span>, u, <span class="st">"(very low association)"</span>, <span class="at">sep =</span> <span class="st">" "</span>))</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Reveal plot</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="demo-AI-comparison_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="explore-association-between-continuous-baseline-covariate-and-continuous-end-of-study-outcome" class="level3">
+<h3 class="anchored" data-anchor-id="explore-association-between-continuous-baseline-covariate-and-continuous-end-of-study-outcome">Explore association between <em>continuous</em> baseline covariate and <em>continuous</em> end-of-study outcome</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">cor</span>(dat_smart<span class="sc">$</span>severity_c, dat_smart<span class="sc">$</span>Y2)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">round</span>(u, <span class="dv">2</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> dat_smart, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> severity_c, <span class="at">y =</span> Y2))</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>) <span class="sc">+</span> <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="sc">-</span><span class="dv">2</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>))</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">ylim</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">7</span>) <span class="sc">+</span> <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Baseline severity (centered)"</span>, <span class="at">y =</span> <span class="st">"Y2"</span>) </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Association between baseline severity and end-of-study outcome"</span>) </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"gam"</span>) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">y =</span> <span class="sc">-</span><span class="dv">2</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"Pearson Correlation:"</span>, u, <span class="st">"(moderate association)"</span>, <span class="at">sep =</span> <span class="st">" "</span>))</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Reveal plot</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="demo-AI-comparison_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">cor</span>(dat_smart<span class="sc">$</span>Y0_c, dat_smart<span class="sc">$</span>Y2)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">round</span>(u, <span class="dv">2</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> dat_smart, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Y0_c, <span class="at">y =</span> Y2))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">3</span>) <span class="sc">+</span> <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="sc">-</span><span class="dv">2</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">ylim</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">7</span>) <span class="sc">+</span> <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>))</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Baseline school performance (centered)"</span>, <span class="at">y =</span> <span class="st">"Y2"</span>) </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Association between baseline school performance and end-of-study outcome"</span>) </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"gam"</span>) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">y =</span> <span class="sc">-</span><span class="dv">2</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="st">"Pearson Correlation:"</span>, u, <span class="st">"(very low association)"</span>, <span class="at">sep =</span> <span class="st">" "</span>))</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Reveal plot</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="demo-AI-comparison_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="marginal-model-without-adjustment-for-baseline-covariates" class="level2">
+<h2 class="anchored" data-anchor-id="marginal-model-without-adjustment-for-baseline-covariates">Marginal Model, without adjustment for baseline covariates</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Load package for data cleaning</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Load package for estimating model parameters and obtaining robust SE's</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geeM)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Step 1: Create weights</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>dat_smart <span class="ot">&lt;-</span> dat_smart <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">design_weights =</span> <span class="dv">2</span><span class="sc">*</span>R <span class="sc">+</span> <span class="dv">4</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>R))</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Step 2: Replicate data from responders</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>rows_not_to_replicate <span class="ot">&lt;-</span> dat_smart <span class="sc">%&gt;%</span> <span class="fu">filter</span>(R<span class="sc">==</span><span class="dv">0</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>rows_to_replicate <span class="ot">&lt;-</span> dat_smart <span class="sc">%&gt;%</span> <span class="fu">filter</span>(R<span class="sc">==</span><span class="dv">1</span>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>plus_one_pseudodata <span class="ot">&lt;-</span> rows_to_replicate <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">A2 =</span> <span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>minus_one_pseudodata <span class="ot">&lt;-</span> rows_to_replicate <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">A2 =</span> <span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>dat_smart_replicated <span class="ot">&lt;-</span> <span class="fu">rbind</span>(rows_not_to_replicate,</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>                              plus_one_pseudodata,</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>                              minus_one_pseudodata)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>dat_smart_replicated <span class="ot">&lt;-</span> dat_smart_replicated <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(R), ID, A1, A2)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Step 3: Estimate parameters of our model for the mean of the </span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co">#            end-of-study outcome</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">geem</span>(Y2 <span class="sc">~</span> A1 <span class="sc">+</span> A2 <span class="sc">+</span> <span class="fu">I</span>(A1<span class="sc">*</span>A2), </span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>              <span class="at">id =</span> ID, </span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>              <span class="at">corstr =</span> <span class="st">"independence"</span>,</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> dat_smart_replicated, </span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>              <span class="at">weights =</span> design_weights)</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Estimates Model SE Robust SE    wald       p
+(Intercept)   3.35300      0.1   0.13160 25.4800 0.00000
+A1            0.31780      0.1   0.13160  2.4150 0.01574
+A2           -0.06937      0.1   0.07092 -0.9781 0.32800
+I(A1 * A2)   -0.03139      0.1   0.07092 -0.4425 0.65810
+
+ Estimated Correlation Parameter:  0 
+ Correlation Structure:  independence 
+ Est. Scale Parameter:  5.987 
+
+ Number of GEE iterations: 2 
+ Number of Clusters:  150    Maximum Cluster Size:  2 
+ Number of observations with nonzero weight:  208 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Step 4: Estimate end-of-study outcome means under each AI </span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#            and pairwise differences</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>L <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -- These statements get the end-of-study outcome mean under each AI</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"End-of-study mean: AI#1 (MED, AUGMENT)"</span>    <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>,  <span class="dv">1</span>),</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"End-of-study mean: AI#2 (BMOD, AUGMENT)"</span>   <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,  <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>),</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"End-of-study mean: AI#3 (MED, INTENSIFY)"</span>  <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>,  <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>),</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"End-of-study mean: AI#4 (BMOD, INTENSIFY)"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,  <span class="dv">1</span>,  <span class="dv">1</span>,  <span class="dv">1</span>),</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -- These statements are to get all pairwise differences</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Between groups diff: AI#1 - AI#2"</span>              <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="sc">-</span><span class="dv">2</span>,  <span class="dv">0</span>,  <span class="dv">2</span>),</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Between groups diff: AI#1 - AI#3"</span>              <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>,  <span class="dv">0</span>, <span class="sc">-</span><span class="dv">2</span>,  <span class="dv">2</span>),</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Between groups diff: AI#1 - AI#4"</span>              <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="sc">-</span><span class="dv">2</span>,  <span class="dv">0</span>),</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Between groups diff: AI#2 - AI#3"</span>              <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>,  <span class="dv">2</span>, <span class="sc">-</span><span class="dv">2</span>,  <span class="dv">0</span>),</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Between groups diff: AI#2 - AI#4"</span>              <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>,  <span class="dv">0</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="sc">-</span><span class="dv">2</span>),</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Between groups diff: AI#3 - AI#4"</span>              <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="sc">-</span><span class="dv">2</span>,  <span class="dv">0</span>, <span class="sc">-</span><span class="dv">2</span>)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>est_contrasts <span class="ot">&lt;-</span> <span class="fu">estimate</span>(<span class="at">fit =</span> model, <span class="at">combos =</span> L)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(est_contrasts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                          Estimate 95% LCL 95% UCL   SE p-value
+End-of-study mean: AI#1 (MED, AUGMENT)        3.07    2.65    3.49 0.21    0.00
+End-of-study mean: AI#2 (BMOD, AUGMENT)       3.77    3.38    4.16 0.20    0.00
+End-of-study mean: AI#3 (MED, INTENSIFY)      3.00    2.54    3.45 0.23    0.00
+End-of-study mean: AI#4 (BMOD, INTENSIFY)     3.57    3.18    3.96 0.20    0.00
+Between groups diff: AI#1 - AI#2             -0.70   -1.27   -0.13 0.29    0.02
+Between groups diff: AI#1 - AI#3              0.08   -0.27    0.42 0.18    0.67
+Between groups diff: AI#1 - AI#4             -0.50   -1.07    0.08 0.29    0.09
+Between groups diff: AI#2 - AI#3              0.77    0.18    1.37 0.30    0.01
+Between groups diff: AI#2 - AI#4              0.20   -0.23    0.64 0.22    0.36
+Between groups diff: AI#3 - AI#4             -0.57   -1.17    0.03 0.31    0.06</code></pre>
+</div>
+</div>
+</section>
+<section id="marginal-model-with-adjustment-for-baseline-covariates" class="level2">
+<h2 class="anchored" data-anchor-id="marginal-model-with-adjustment-for-baseline-covariates">Marginal Model, with adjustment for baseline covariates</h2>
+<section id="adjustment-using-a-baseline-covariate-having-very-low-association-with-end-of-study-outcome" class="level3">
+<h3 class="anchored" data-anchor-id="adjustment-using-a-baseline-covariate-having-very-low-association-with-end-of-study-outcome">Adjustment using a baseline covariate having very low association with end-of-study outcome</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Load package for data cleaning</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Load package for estimating model parameters and obtaining robust SE's</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geeM)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Step 1: Create weights</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>dat_smart <span class="ot">&lt;-</span> dat_smart <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">design_weights =</span> <span class="dv">2</span><span class="sc">*</span>R <span class="sc">+</span> <span class="dv">4</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>R))</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Step 2: Replicate data from responders</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>rows_not_to_replicate <span class="ot">&lt;-</span> dat_smart <span class="sc">%&gt;%</span> <span class="fu">filter</span>(R<span class="sc">==</span><span class="dv">0</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>rows_to_replicate <span class="ot">&lt;-</span> dat_smart <span class="sc">%&gt;%</span> <span class="fu">filter</span>(R<span class="sc">==</span><span class="dv">1</span>)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>plus_one_pseudodata <span class="ot">&lt;-</span> rows_to_replicate <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">A2 =</span> <span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>minus_one_pseudodata <span class="ot">&lt;-</span> rows_to_replicate <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">A2 =</span> <span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>dat_smart_replicated <span class="ot">&lt;-</span> <span class="fu">rbind</span>(rows_not_to_replicate,</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>                              plus_one_pseudodata,</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>                              minus_one_pseudodata)</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>dat_smart_replicated <span class="ot">&lt;-</span> dat_smart_replicated <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(R), ID, A1, A2)</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Step 3: Estimate parameters of our model for the mean of the </span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="co">#            end-of-study outcome</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>model_with_baseline <span class="ot">&lt;-</span> <span class="fu">geem</span>(Y2 <span class="sc">~</span> priormed_c <span class="sc">+</span> A1 <span class="sc">+</span> A2 <span class="sc">+</span> <span class="fu">I</span>(A1<span class="sc">*</span>A2), </span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>                            <span class="at">id =</span> ID, </span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>                            <span class="at">corstr =</span> <span class="st">"independence"</span>,</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>                            <span class="at">data =</span> dat_smart_replicated, </span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>                            <span class="at">weights =</span> design_weights)</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_with_baseline)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Estimates Model SE Robust SE    wald       p
+(Intercept)   3.35300   0.1001   0.13180 25.4500 0.00000
+priormed_c   -0.14740   0.2214   0.31630 -0.4659 0.64130
+A1            0.32330   0.1005   0.13260  2.4380 0.01478
+A2           -0.06988   0.1001   0.07039 -0.9928 0.32080
+I(A1 * A2)   -0.03428   0.1002   0.07094 -0.4833 0.62890
+
+ Estimated Correlation Parameter:  0 
+ Correlation Structure:  independence 
+ Est. Scale Parameter:  6.003 
+
+ Number of GEE iterations: 2 
+ Number of Clusters:  150    Maximum Cluster Size:  2 
+ Number of observations with nonzero weight:  208 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Step 4: Estimate end-of-study outcome means under each AI </span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#            and pairwise differences</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>L_with_baseline <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -- These statements get the end-of-study outcome mean under each AI</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"End-of-study mean: AI#1 (MED, AUGMENT)"</span>    <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>,  <span class="dv">1</span>),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"End-of-study mean: AI#2 (BMOD, AUGMENT)"</span>   <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>,  <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>),</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"End-of-study mean: AI#3 (MED, INTENSIFY)"</span>  <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>,  <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>),</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"End-of-study mean: AI#4 (BMOD, INTENSIFY)"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>,  <span class="dv">1</span>,  <span class="dv">1</span>,  <span class="dv">1</span>),</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -- These statements are to get all pairwise differences</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Diff: AI#1 - AI#2"</span>              <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">2</span>,  <span class="dv">0</span>,  <span class="dv">2</span>),</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Diff: AI#1 - AI#3"</span>              <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>,  <span class="dv">0</span>, <span class="sc">-</span><span class="dv">2</span>,  <span class="dv">2</span>),</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Diff: AI#1 - AI#4"</span>              <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="sc">-</span><span class="dv">2</span>,  <span class="dv">0</span>),</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Diff: AI#2 - AI#3"</span>              <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>,  <span class="dv">2</span>, <span class="sc">-</span><span class="dv">2</span>,  <span class="dv">0</span>),</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Diff: AI#2 - AI#4"</span>              <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>,  <span class="dv">0</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="sc">-</span><span class="dv">2</span>),</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Diff: AI#3 - AI#4"</span>              <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">2</span>,  <span class="dv">0</span>, <span class="sc">-</span><span class="dv">2</span>)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>est_contrasts_BL <span class="ot">&lt;-</span> <span class="fu">estimate</span>(<span class="at">fit =</span> model_with_baseline, <span class="at">combos =</span> L_with_baseline)</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(est_contrasts_BL)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                          Estimate 95% LCL 95% UCL   SE p-value
+End-of-study mean: AI#1 (MED, AUGMENT)        3.07    2.63    3.50 0.22    0.00
+End-of-study mean: AI#2 (BMOD, AUGMENT)       3.78    3.40    4.16 0.19    0.00
+End-of-study mean: AI#3 (MED, INTENSIFY)      2.99    2.53    3.46 0.24    0.00
+End-of-study mean: AI#4 (BMOD, INTENSIFY)     3.57    3.19    3.95 0.19    0.00
+Diff: AI#1 - AI#2                            -0.72   -1.30   -0.13 0.30    0.02
+Diff: AI#1 - AI#3                             0.07   -0.28    0.42 0.18    0.69
+Diff: AI#1 - AI#4                            -0.51   -1.08    0.07 0.29    0.08
+Diff: AI#2 - AI#3                             0.79    0.19    1.39 0.31    0.01
+Diff: AI#2 - AI#4                             0.21   -0.22    0.64 0.22    0.34
+Diff: AI#3 - AI#4                            -0.58   -1.18    0.02 0.31    0.06</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -- The next line is only necessary because we would like to plot</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#    estimates from the three analyses side-by-side</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>est_contrasts_BL1 <span class="ot">&lt;-</span> est_contrasts_BL</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="adjustment-using-a-baseline-covariate-having-moderate-association-with-end-of-study-outcome" class="level3">
+<h3 class="anchored" data-anchor-id="adjustment-using-a-baseline-covariate-having-moderate-association-with-end-of-study-outcome">Adjustment using a baseline covariate having moderate association with end-of-study outcome</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Load package for data cleaning</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Load package for estimating model parameters and obtaining robust SE's</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geeM)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Step 1: Create weights</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>dat_smart <span class="ot">&lt;-</span> dat_smart <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">design_weights =</span> <span class="dv">2</span><span class="sc">*</span>R <span class="sc">+</span> <span class="dv">4</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>R))</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Step 2: Replicate data from responders</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>rows_not_to_replicate <span class="ot">&lt;-</span> dat_smart <span class="sc">%&gt;%</span> <span class="fu">filter</span>(R<span class="sc">==</span><span class="dv">0</span>)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>rows_to_replicate <span class="ot">&lt;-</span> dat_smart <span class="sc">%&gt;%</span> <span class="fu">filter</span>(R<span class="sc">==</span><span class="dv">1</span>)</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>plus_one_pseudodata <span class="ot">&lt;-</span> rows_to_replicate <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">A2 =</span> <span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>minus_one_pseudodata <span class="ot">&lt;-</span> rows_to_replicate <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">A2 =</span> <span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>dat_smart_replicated <span class="ot">&lt;-</span> <span class="fu">rbind</span>(rows_not_to_replicate,</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>                              plus_one_pseudodata,</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>                              minus_one_pseudodata)</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>dat_smart_replicated <span class="ot">&lt;-</span> dat_smart_replicated <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(R), ID, A1, A2)</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Step 3: Estimate parameters of our model for the mean of the </span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="co">#            end-of-study outcome</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>model_with_baseline <span class="ot">&lt;-</span> <span class="fu">geem</span>(Y2 <span class="sc">~</span> severity_c <span class="sc">+</span> A1 <span class="sc">+</span> A2 <span class="sc">+</span> <span class="fu">I</span>(A1<span class="sc">*</span>A2), </span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>                            <span class="at">id =</span> ID, </span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>                            <span class="at">corstr =</span> <span class="st">"independence"</span>,</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>                            <span class="at">data =</span> dat_smart_replicated, </span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>                            <span class="at">weights =</span> design_weights)</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_with_baseline)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Estimates Model SE Robust SE    wald        p
+(Intercept)   3.35400  0.09770   0.12830 26.1500 0.000000
+severity_c   -0.33050  0.10070   0.13120 -2.5190 0.011780
+A1            0.34710  0.09810   0.12880  2.6950 0.007033
+A2           -0.09084  0.09792   0.06859 -1.3240 0.185400
+I(A1 * A2)   -0.04928  0.09785   0.06897 -0.7145 0.474900
+
+ Estimated Correlation Parameter:  0 
+ Correlation Structure:  independence 
+ Est. Scale Parameter:  5.714 
+
+ Number of GEE iterations: 2 
+ Number of Clusters:  150    Maximum Cluster Size:  2 
+ Number of observations with nonzero weight:  208 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Step 4: Estimate end-of-study outcome means under each AI </span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#            and pairwise differences</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>L_with_baseline <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -- These statements get the end-of-study outcome mean under each AI</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"End-of-study mean: AI#1 (MED, AUGMENT)"</span>    <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>,  <span class="dv">1</span>),</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"End-of-study mean: AI#2 (BMOD, AUGMENT)"</span>   <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>,  <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>),</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"End-of-study mean: AI#3 (MED, INTENSIFY)"</span>  <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>,  <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>),</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"End-of-study mean: AI#4 (BMOD, INTENSIFY)"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>,  <span class="dv">1</span>,  <span class="dv">1</span>,  <span class="dv">1</span>),</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -- These statements are to get all pairwise differences</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Diff: AI#1 - AI#2"</span>              <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">2</span>,  <span class="dv">0</span>,  <span class="dv">2</span>),</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Diff: AI#1 - AI#3"</span>              <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>,  <span class="dv">0</span>, <span class="sc">-</span><span class="dv">2</span>,  <span class="dv">2</span>),</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Diff: AI#1 - AI#4"</span>              <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="sc">-</span><span class="dv">2</span>,  <span class="dv">0</span>),</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Diff: AI#2 - AI#3"</span>              <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>,  <span class="dv">2</span>, <span class="sc">-</span><span class="dv">2</span>,  <span class="dv">0</span>),</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Diff: AI#2 - AI#4"</span>              <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>,  <span class="dv">0</span>, <span class="sc">-</span><span class="dv">2</span>, <span class="sc">-</span><span class="dv">2</span>),</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Diff: AI#3 - AI#4"</span>              <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">2</span>,  <span class="dv">0</span>, <span class="sc">-</span><span class="dv">2</span>)</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>est_contrasts_BL <span class="ot">&lt;-</span> <span class="fu">estimate</span>(<span class="at">fit =</span> model_with_baseline, <span class="at">combos =</span> L_with_baseline)</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(est_contrasts_BL)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                          Estimate 95% LCL 95% UCL   SE p-value
+End-of-study mean: AI#1 (MED, AUGMENT)        3.05    2.65    3.45 0.20    0.00
+End-of-study mean: AI#2 (BMOD, AUGMENT)       3.84    3.46    4.22 0.20    0.00
+End-of-study mean: AI#3 (MED, INTENSIFY)      2.97    2.52    3.41 0.23    0.00
+End-of-study mean: AI#4 (BMOD, INTENSIFY)     3.56    3.17    3.95 0.20    0.00
+Diff: AI#1 - AI#2                            -0.79   -1.35   -0.23 0.29    0.01
+Diff: AI#1 - AI#3                             0.08   -0.25    0.42 0.17    0.63
+Diff: AI#1 - AI#4                            -0.51   -1.07    0.04 0.28    0.07
+Diff: AI#2 - AI#3                             0.88    0.29    1.46 0.30    0.00
+Diff: AI#2 - AI#4                             0.28   -0.14    0.70 0.21    0.19
+Diff: AI#3 - AI#4                            -0.60   -1.18   -0.01 0.30    0.05</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -- The next line is only necessary because we would like to plot</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co">#    estimates from the three analyses side-by-side</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>est_contrasts_BL2 <span class="ot">&lt;-</span> est_contrasts_BL</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="compare-estimates-and-confidence-limits-across-all-models" class="level3">
+<h3 class="anchored" data-anchor-id="compare-estimates-and-confidence-limits-across-all-models">Compare estimates and confidence limits across all models</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Note: The following code snippet employs advanced R coding concepts;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#          you may focus on the meaning of the output plot, rather than the </span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#          specifics of the code itself, without losing understanding of</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">#          the basic workflow</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Convert matrix into data frame because ggplot does not permit matrix inputs</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>dat_plot <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(est_contrasts)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>dat_plot_bl1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(est_contrasts_BL1)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>dat_plot_bl2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(est_contrasts_BL2)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co"># -- We strongly prefer using syntactic names for data frames</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(dat_plot) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"estimate"</span>, <span class="st">"lower"</span>, <span class="st">"upper"</span>, <span class="st">"stderr"</span>, <span class="st">"pval"</span>)</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>dat_plot[[<span class="st">"contrast_labels"</span>]] <span class="ot">&lt;-</span> <span class="fu">row.names</span>(dat_plot)</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(dat_plot) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(dat_plot_bl1) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"estimate"</span>, <span class="st">"lower"</span>, <span class="st">"upper"</span>, <span class="st">"stderr"</span>, <span class="st">"pval"</span>)</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>dat_plot_bl1[[<span class="st">"contrast_labels"</span>]] <span class="ot">&lt;-</span> <span class="fu">row.names</span>(dat_plot_bl1)</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(dat_plot_bl1) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(dat_plot_bl2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"estimate"</span>, <span class="st">"lower"</span>, <span class="st">"upper"</span>, <span class="st">"stderr"</span>, <span class="st">"pval"</span>)</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>dat_plot_bl2[[<span class="st">"contrast_labels"</span>]] <span class="ot">&lt;-</span> <span class="fu">row.names</span>(dat_plot_bl2)</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(dat_plot_bl2) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Grab only the rows you will plot</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>dat_plot <span class="ot">&lt;-</span> dat_plot <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="at">pattern =</span> <span class="st">"End-of-study mean:"</span>, <span class="at">x =</span> contrast_labels, <span class="at">fixed =</span> <span class="cn">TRUE</span>)) </span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>dat_plot_bl1 <span class="ot">&lt;-</span> dat_plot_bl1 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="at">pattern =</span> <span class="st">"End-of-study mean:"</span>, <span class="at">x =</span> contrast_labels, <span class="at">fixed =</span> <span class="cn">TRUE</span>)) </span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>dat_plot_bl2 <span class="ot">&lt;-</span> dat_plot_bl2 <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="at">pattern =</span> <span class="st">"End-of-study mean:"</span>, <span class="at">x =</span> contrast_labels, <span class="at">fixed =</span> <span class="cn">TRUE</span>)) </span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Start building a graph</span></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> dat_plot, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(contrast_labels), <span class="at">y =</span> estimate))</span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">5</span>), <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="fl">2.5</span>,<span class="dv">3</span>,<span class="fl">3.5</span>,<span class="dv">4</span>,<span class="fl">4.5</span>,<span class="dv">5</span>))</span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"AI#1 (MED, AUGMENT)"</span>, <span class="st">"AI#2 (BMOD, AUGMENT)"</span>, <span class="st">"AI#3 (MED, INTENSIFY)"</span>, <span class="st">"AI#4 (BMOD, INTENSIFY)"</span>))</span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>)</span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"End-of-study means and 95% CI's under each adaptive intervention"</span>, <span class="at">subtitle =</span> <span class="st">"solid line: no adjustment for baseline covariates</span><span class="sc">\n</span><span class="st">dashed line: with adjustment -- low association</span><span class="sc">\n</span><span class="st">dotted line: with adjustment -- moderate association"</span>)</span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a><span class="co"># -- No adjustment for baseline covariates</span></span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"pointrange"</span>, <span class="at">x =</span> <span class="dv">1</span>, <span class="at">y =</span> dat_plot[[<span class="st">"estimate"</span>]][<span class="dv">1</span>], <span class="at">ymin =</span> dat_plot[[<span class="st">"lower"</span>]][<span class="dv">1</span>], <span class="at">ymax =</span> dat_plot[[<span class="st">"upper"</span>]][<span class="dv">1</span>], <span class="at">colour =</span> <span class="st">"aquamarine3"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">1</span>)</span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"pointrange"</span>, <span class="at">x =</span> <span class="dv">2</span>, <span class="at">y =</span> dat_plot[[<span class="st">"estimate"</span>]][<span class="dv">2</span>], <span class="at">ymin =</span> dat_plot[[<span class="st">"lower"</span>]][<span class="dv">2</span>], <span class="at">ymax =</span> dat_plot[[<span class="st">"upper"</span>]][<span class="dv">2</span>], <span class="at">colour =</span> <span class="st">"coral"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">1</span>)</span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"pointrange"</span>, <span class="at">x =</span> <span class="dv">3</span>, <span class="at">y =</span> dat_plot[[<span class="st">"estimate"</span>]][<span class="dv">3</span>], <span class="at">ymin =</span> dat_plot[[<span class="st">"lower"</span>]][<span class="dv">3</span>], <span class="at">ymax =</span> dat_plot[[<span class="st">"upper"</span>]][<span class="dv">3</span>], <span class="at">colour =</span> <span class="st">"gold"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">1</span>)</span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"pointrange"</span>, <span class="at">x =</span> <span class="dv">4</span>, <span class="at">y =</span> dat_plot[[<span class="st">"estimate"</span>]][<span class="dv">4</span>], <span class="at">ymin =</span> dat_plot[[<span class="st">"lower"</span>]][<span class="dv">4</span>], <span class="at">ymax =</span> dat_plot[[<span class="st">"upper"</span>]][<span class="dv">4</span>], <span class="at">colour =</span> <span class="st">"slateblue2"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">1</span>)</span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">0.9</span>, <span class="at">xend =</span> <span class="fl">1.1</span>, <span class="at">y =</span> dat_plot[[<span class="st">"upper"</span>]][<span class="dv">1</span>], <span class="at">yend =</span> dat_plot[[<span class="st">"upper"</span>]][<span class="dv">1</span>], <span class="at">colour =</span> <span class="st">"aquamarine3"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">1</span>)</span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">1.9</span>, <span class="at">xend =</span> <span class="fl">2.1</span>, <span class="at">y =</span> dat_plot[[<span class="st">"upper"</span>]][<span class="dv">2</span>], <span class="at">yend =</span> dat_plot[[<span class="st">"upper"</span>]][<span class="dv">2</span>], <span class="at">colour =</span> <span class="st">"coral"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">1</span>)</span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">2.9</span>, <span class="at">xend =</span> <span class="fl">3.1</span>, <span class="at">y =</span> dat_plot[[<span class="st">"upper"</span>]][<span class="dv">3</span>], <span class="at">yend =</span> dat_plot[[<span class="st">"upper"</span>]][<span class="dv">3</span>], <span class="at">colour =</span> <span class="st">"gold"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">1</span>)</span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">3.9</span>, <span class="at">xend =</span> <span class="fl">4.1</span>, <span class="at">y =</span> dat_plot[[<span class="st">"upper"</span>]][<span class="dv">4</span>], <span class="at">yend =</span> dat_plot[[<span class="st">"upper"</span>]][<span class="dv">4</span>], <span class="at">colour =</span> <span class="st">"slateblue2"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">1</span>)</span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">0.9</span>, <span class="at">xend =</span> <span class="fl">1.1</span>, <span class="at">y =</span> dat_plot[[<span class="st">"lower"</span>]][<span class="dv">1</span>], <span class="at">yend =</span> dat_plot[[<span class="st">"lower"</span>]][<span class="dv">1</span>], <span class="at">colour =</span> <span class="st">"aquamarine3"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">1</span>)</span>
+<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">1.9</span>, <span class="at">xend =</span> <span class="fl">2.1</span>, <span class="at">y =</span> dat_plot[[<span class="st">"lower"</span>]][<span class="dv">2</span>], <span class="at">yend =</span> dat_plot[[<span class="st">"lower"</span>]][<span class="dv">2</span>], <span class="at">colour =</span> <span class="st">"coral"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">1</span>)</span>
+<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">2.9</span>, <span class="at">xend =</span> <span class="fl">3.1</span>, <span class="at">y =</span> dat_plot[[<span class="st">"lower"</span>]][<span class="dv">3</span>], <span class="at">yend =</span> dat_plot[[<span class="st">"lower"</span>]][<span class="dv">3</span>], <span class="at">colour =</span> <span class="st">"gold"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">1</span>)</span>
+<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">3.9</span>, <span class="at">xend =</span> <span class="fl">4.1</span>, <span class="at">y =</span> dat_plot[[<span class="st">"lower"</span>]][<span class="dv">4</span>], <span class="at">yend =</span> dat_plot[[<span class="st">"lower"</span>]][<span class="dv">4</span>], <span class="at">colour =</span> <span class="st">"slateblue2"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">1</span>)</span>
+<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"point"</span>, <span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>), <span class="at">y =</span> dat_plot[[<span class="st">"estimate"</span>]], <span class="at">size =</span> <span class="dv">8</span>, <span class="at">colour =</span> <span class="fu">c</span>(<span class="st">"aquamarine3"</span>,<span class="st">"coral"</span>,<span class="st">"gold"</span>,<span class="st">"slateblue2"</span>))</span>
+<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Adjust for baseline covariates</span></span>
+<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"pointrange"</span>, <span class="at">x =</span> <span class="fl">1.2</span>, <span class="at">y =</span> dat_plot_bl1[[<span class="st">"estimate"</span>]][<span class="dv">1</span>], <span class="at">ymin =</span> dat_plot_bl1[[<span class="st">"lower"</span>]][<span class="dv">1</span>], <span class="at">ymax =</span> dat_plot_bl1[[<span class="st">"upper"</span>]][<span class="dv">1</span>], <span class="at">colour =</span> <span class="st">"aquamarine3"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">2</span>)</span>
+<span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"pointrange"</span>, <span class="at">x =</span> <span class="fl">2.2</span>, <span class="at">y =</span> dat_plot_bl1[[<span class="st">"estimate"</span>]][<span class="dv">2</span>], <span class="at">ymin =</span> dat_plot_bl1[[<span class="st">"lower"</span>]][<span class="dv">2</span>], <span class="at">ymax =</span> dat_plot_bl1[[<span class="st">"upper"</span>]][<span class="dv">2</span>], <span class="at">colour =</span> <span class="st">"coral"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">2</span>)</span>
+<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"pointrange"</span>, <span class="at">x =</span> <span class="fl">3.2</span>, <span class="at">y =</span> dat_plot_bl1[[<span class="st">"estimate"</span>]][<span class="dv">3</span>], <span class="at">ymin =</span> dat_plot_bl1[[<span class="st">"lower"</span>]][<span class="dv">3</span>], <span class="at">ymax =</span> dat_plot_bl1[[<span class="st">"upper"</span>]][<span class="dv">3</span>], <span class="at">colour =</span> <span class="st">"gold"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">2</span>)</span>
+<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"pointrange"</span>, <span class="at">x =</span> <span class="fl">4.2</span>, <span class="at">y =</span> dat_plot_bl1[[<span class="st">"estimate"</span>]][<span class="dv">4</span>], <span class="at">ymin =</span> dat_plot_bl1[[<span class="st">"lower"</span>]][<span class="dv">4</span>], <span class="at">ymax =</span> dat_plot_bl1[[<span class="st">"upper"</span>]][<span class="dv">4</span>], <span class="at">colour =</span> <span class="st">"slateblue2"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">2</span>)</span>
+<span id="cb20-60"><a href="#cb20-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-61"><a href="#cb20-61" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">1.1</span>, <span class="at">xend =</span> <span class="fl">1.3</span>, <span class="at">y =</span> dat_plot_bl1[[<span class="st">"upper"</span>]][<span class="dv">1</span>], <span class="at">yend =</span> dat_plot_bl1[[<span class="st">"upper"</span>]][<span class="dv">1</span>], <span class="at">colour =</span> <span class="st">"aquamarine3"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">1</span>)</span>
+<span id="cb20-62"><a href="#cb20-62" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">2.1</span>, <span class="at">xend =</span> <span class="fl">2.3</span>, <span class="at">y =</span> dat_plot_bl1[[<span class="st">"upper"</span>]][<span class="dv">2</span>], <span class="at">yend =</span> dat_plot_bl1[[<span class="st">"upper"</span>]][<span class="dv">2</span>], <span class="at">colour =</span> <span class="st">"coral"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">1</span>)</span>
+<span id="cb20-63"><a href="#cb20-63" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">3.1</span>, <span class="at">xend =</span> <span class="fl">3.3</span>, <span class="at">y =</span> dat_plot_bl1[[<span class="st">"upper"</span>]][<span class="dv">3</span>], <span class="at">yend =</span> dat_plot_bl1[[<span class="st">"upper"</span>]][<span class="dv">3</span>], <span class="at">colour =</span> <span class="st">"gold"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">1</span>)</span>
+<span id="cb20-64"><a href="#cb20-64" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">4.1</span>, <span class="at">xend =</span> <span class="fl">4.3</span>, <span class="at">y =</span> dat_plot_bl1[[<span class="st">"upper"</span>]][<span class="dv">4</span>], <span class="at">yend =</span> dat_plot_bl1[[<span class="st">"upper"</span>]][<span class="dv">4</span>], <span class="at">colour =</span> <span class="st">"slateblue2"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">1</span>)</span>
+<span id="cb20-65"><a href="#cb20-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-66"><a href="#cb20-66" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">1.1</span>, <span class="at">xend =</span> <span class="fl">1.3</span>, <span class="at">y =</span> dat_plot_bl1[[<span class="st">"lower"</span>]][<span class="dv">1</span>], <span class="at">yend =</span> dat_plot_bl1[[<span class="st">"lower"</span>]][<span class="dv">1</span>], <span class="at">colour =</span> <span class="st">"aquamarine3"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">1</span>)</span>
+<span id="cb20-67"><a href="#cb20-67" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">2.1</span>, <span class="at">xend =</span> <span class="fl">2.3</span>, <span class="at">y =</span> dat_plot_bl1[[<span class="st">"lower"</span>]][<span class="dv">2</span>], <span class="at">yend =</span> dat_plot_bl1[[<span class="st">"lower"</span>]][<span class="dv">2</span>], <span class="at">colour =</span> <span class="st">"coral"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">1</span>)</span>
+<span id="cb20-68"><a href="#cb20-68" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">3.1</span>, <span class="at">xend =</span> <span class="fl">3.3</span>, <span class="at">y =</span> dat_plot_bl1[[<span class="st">"lower"</span>]][<span class="dv">3</span>], <span class="at">yend =</span> dat_plot_bl1[[<span class="st">"lower"</span>]][<span class="dv">3</span>], <span class="at">colour =</span> <span class="st">"gold"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">1</span>)</span>
+<span id="cb20-69"><a href="#cb20-69" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">4.1</span>, <span class="at">xend =</span> <span class="fl">4.3</span>, <span class="at">y =</span> dat_plot_bl1[[<span class="st">"lower"</span>]][<span class="dv">4</span>], <span class="at">yend =</span> dat_plot_bl1[[<span class="st">"lower"</span>]][<span class="dv">4</span>], <span class="at">colour =</span> <span class="st">"slateblue2"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">1</span>)</span>
+<span id="cb20-70"><a href="#cb20-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-71"><a href="#cb20-71" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"point"</span>, <span class="at">x =</span> <span class="fu">c</span>(<span class="fl">1.2</span>, <span class="fl">2.2</span>, <span class="fl">3.2</span>, <span class="fl">4.2</span>), <span class="at">y =</span> dat_plot_bl1[[<span class="st">"estimate"</span>]], <span class="at">size =</span> <span class="dv">8</span>, <span class="at">colour =</span> <span class="fu">c</span>(<span class="st">"aquamarine3"</span>,<span class="st">"coral"</span>,<span class="st">"gold"</span>,<span class="st">"slateblue2"</span>))</span>
+<span id="cb20-72"><a href="#cb20-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-73"><a href="#cb20-73" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Adjust for baseline covariates</span></span>
+<span id="cb20-74"><a href="#cb20-74" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"pointrange"</span>, <span class="at">x =</span> <span class="fl">1.4</span>, <span class="at">y =</span> dat_plot_bl2[[<span class="st">"estimate"</span>]][<span class="dv">1</span>], <span class="at">ymin =</span> dat_plot_bl2[[<span class="st">"lower"</span>]][<span class="dv">1</span>], <span class="at">ymax =</span> dat_plot_bl2[[<span class="st">"upper"</span>]][<span class="dv">1</span>], <span class="at">colour =</span> <span class="st">"aquamarine3"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">3</span>)</span>
+<span id="cb20-75"><a href="#cb20-75" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"pointrange"</span>, <span class="at">x =</span> <span class="fl">2.4</span>, <span class="at">y =</span> dat_plot_bl2[[<span class="st">"estimate"</span>]][<span class="dv">2</span>], <span class="at">ymin =</span> dat_plot_bl2[[<span class="st">"lower"</span>]][<span class="dv">2</span>], <span class="at">ymax =</span> dat_plot_bl2[[<span class="st">"upper"</span>]][<span class="dv">2</span>], <span class="at">colour =</span> <span class="st">"coral"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">3</span>)</span>
+<span id="cb20-76"><a href="#cb20-76" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"pointrange"</span>, <span class="at">x =</span> <span class="fl">3.4</span>, <span class="at">y =</span> dat_plot_bl2[[<span class="st">"estimate"</span>]][<span class="dv">3</span>], <span class="at">ymin =</span> dat_plot_bl2[[<span class="st">"lower"</span>]][<span class="dv">3</span>], <span class="at">ymax =</span> dat_plot_bl2[[<span class="st">"upper"</span>]][<span class="dv">3</span>], <span class="at">colour =</span> <span class="st">"gold"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">3</span>)</span>
+<span id="cb20-77"><a href="#cb20-77" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"pointrange"</span>, <span class="at">x =</span> <span class="fl">4.4</span>, <span class="at">y =</span> dat_plot_bl2[[<span class="st">"estimate"</span>]][<span class="dv">4</span>], <span class="at">ymin =</span> dat_plot_bl2[[<span class="st">"lower"</span>]][<span class="dv">4</span>], <span class="at">ymax =</span> dat_plot_bl2[[<span class="st">"upper"</span>]][<span class="dv">4</span>], <span class="at">colour =</span> <span class="st">"slateblue2"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">3</span>)</span>
+<span id="cb20-78"><a href="#cb20-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-79"><a href="#cb20-79" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">1.3</span>, <span class="at">xend =</span> <span class="fl">1.5</span>, <span class="at">y =</span> dat_plot_bl2[[<span class="st">"upper"</span>]][<span class="dv">1</span>], <span class="at">yend =</span> dat_plot_bl2[[<span class="st">"upper"</span>]][<span class="dv">1</span>], <span class="at">colour =</span> <span class="st">"aquamarine3"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">1</span>)</span>
+<span id="cb20-80"><a href="#cb20-80" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">2.3</span>, <span class="at">xend =</span> <span class="fl">2.5</span>, <span class="at">y =</span> dat_plot_bl2[[<span class="st">"upper"</span>]][<span class="dv">2</span>], <span class="at">yend =</span> dat_plot_bl2[[<span class="st">"upper"</span>]][<span class="dv">2</span>], <span class="at">colour =</span> <span class="st">"coral"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">1</span>)</span>
+<span id="cb20-81"><a href="#cb20-81" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">3.3</span>, <span class="at">xend =</span> <span class="fl">3.5</span>, <span class="at">y =</span> dat_plot_bl2[[<span class="st">"upper"</span>]][<span class="dv">3</span>], <span class="at">yend =</span> dat_plot_bl2[[<span class="st">"upper"</span>]][<span class="dv">3</span>], <span class="at">colour =</span> <span class="st">"gold"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">1</span>)</span>
+<span id="cb20-82"><a href="#cb20-82" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">4.3</span>, <span class="at">xend =</span> <span class="fl">4.5</span>, <span class="at">y =</span> dat_plot_bl2[[<span class="st">"upper"</span>]][<span class="dv">4</span>], <span class="at">yend =</span> dat_plot_bl2[[<span class="st">"upper"</span>]][<span class="dv">4</span>], <span class="at">colour =</span> <span class="st">"slateblue2"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">1</span>)</span>
+<span id="cb20-83"><a href="#cb20-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-84"><a href="#cb20-84" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">1.3</span>, <span class="at">xend =</span> <span class="fl">1.5</span>, <span class="at">y =</span> dat_plot_bl2[[<span class="st">"lower"</span>]][<span class="dv">1</span>], <span class="at">yend =</span> dat_plot_bl2[[<span class="st">"lower"</span>]][<span class="dv">1</span>], <span class="at">colour =</span> <span class="st">"aquamarine3"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">1</span>)</span>
+<span id="cb20-85"><a href="#cb20-85" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">2.3</span>, <span class="at">xend =</span> <span class="fl">2.5</span>, <span class="at">y =</span> dat_plot_bl2[[<span class="st">"lower"</span>]][<span class="dv">2</span>], <span class="at">yend =</span> dat_plot_bl2[[<span class="st">"lower"</span>]][<span class="dv">2</span>], <span class="at">colour =</span> <span class="st">"coral"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">1</span>)</span>
+<span id="cb20-86"><a href="#cb20-86" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">3.3</span>, <span class="at">xend =</span> <span class="fl">3.5</span>, <span class="at">y =</span> dat_plot_bl2[[<span class="st">"lower"</span>]][<span class="dv">3</span>], <span class="at">yend =</span> dat_plot_bl2[[<span class="st">"lower"</span>]][<span class="dv">3</span>], <span class="at">colour =</span> <span class="st">"gold"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">1</span>)</span>
+<span id="cb20-87"><a href="#cb20-87" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">4.3</span>, <span class="at">xend =</span> <span class="fl">4.5</span>, <span class="at">y =</span> dat_plot_bl2[[<span class="st">"lower"</span>]][<span class="dv">4</span>], <span class="at">yend =</span> dat_plot_bl2[[<span class="st">"lower"</span>]][<span class="dv">4</span>], <span class="at">colour =</span> <span class="st">"slateblue2"</span>, <span class="at">linewidth =</span> <span class="dv">2</span>, <span class="at">linetype =</span> <span class="dv">1</span>)</span>
+<span id="cb20-88"><a href="#cb20-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-89"><a href="#cb20-89" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> g <span class="sc">+</span> <span class="fu">annotate</span>(<span class="st">"point"</span>, <span class="at">x =</span> <span class="fu">c</span>(<span class="fl">1.4</span>, <span class="fl">2.4</span>, <span class="fl">3.4</span>, <span class="fl">4.4</span>), <span class="at">y =</span> dat_plot_bl2[[<span class="st">"estimate"</span>]], <span class="at">size =</span> <span class="dv">8</span>, <span class="at">colour =</span> <span class="fu">c</span>(<span class="st">"aquamarine3"</span>,<span class="st">"coral"</span>,<span class="st">"gold"</span>,<span class="st">"slateblue2"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -- Reveal plot</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="demo-AI-comparison_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="1056"></p>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,436 @@
+---
+title: "Module 4 / DEMO 2: Comparing Adaptive Interventions"
+output: html
+title-block-banner: TRUE
+---
+
+# Data Analysis / HELPER FUNCTIONS
+
+```{r}
+#| message: false
+#| warning: false
+
+estimate <- function(fit, combos) {
+  # -- Details about function inputs
+  #    fit:
+  #           must be of class 'geem' (obtained from geeM package)
+  #    combos: 
+  #           must be of class 'matrix'
+  #           specifies linear combinations of parameter estimates
+  
+  # -- Compute the mean estimate
+  est <- combos %*% as.matrix(fit$beta)
+  
+  # -- Get the appropriate variance estimate
+  var <- fit$var
+  
+  # -- Compute standard error of mean estimate and confidence bounds
+  se.est <- sqrt(diag(combos %*% var %*% t(combos)))
+  lcl <- est - se.est * qnorm(0.975)
+  ucl <- est + se.est * qnorm(0.975)
+  
+  # -- Perform a 1-degree-of-freedom Wald test on the estimate
+  pvalue <- 1 - pchisq((est/se.est)^2, df = 1)
+  
+  # -- Combine and format output
+  out <- cbind(est, lcl, ucl, se.est, pvalue)
+  rownames(out) <- rownames(combos)
+  colnames(out) <- c("Estimate", "95% LCL", "95% UCL", "SE", "p-value")
+  out <- round(out, 2)
+  
+  # -- Output is a rough equivalent of SAS PROC GENMOD's ESTIMATE statement
+  return(out)
+}
+```
+
+# Data Analysis / DEMO WORKFLOW
+
+## Load data and understand relationships between variables in the dataset
+
+```{r}
+#| message: false
+#| warning: false
+
+# -- Load package for plotting
+library(ggplot2)
+
+# -- Load package for data cleaning
+library(dplyr)
+
+# -- Load package containing simulated data and documentation
+library(CATIE2023)
+dat_smart <- CATIE2023::adhd
+
+# -- Baseline covariates need to be centered to facilitate interpretability
+#    of models should we choose to specify a model that adjusts for 
+#    baseline covariates
+#
+# -- Create centered baseline covariates here.
+#    severity is already centered, according to the documentation.
+#    So, we just need to rename to reflect the fact that it's already centered.
+#    priormed, race, and Y0 have not yet been centered.
+#    We suffix the names of the centered variables by "_c".
+dat_smart <- dat_smart %>%
+  rename(severity_c = severity) %>%
+  mutate(priormed_c = priormed - mean(priormed),
+         odd_c = odd - mean(odd),
+         race_c = race - mean(race),
+         Y0_c = Y0 - mean(Y0))
+```
+
+### Explore association between *binary* baseline covariate and *continuous* end-of-study outcome
+
+```{r}
+#| message: false
+#| warning: false
+
+u <- cor(dat_smart$priormed, dat_smart$Y2)
+u <- round(u, 2)
+
+mean_by_group <- dat_smart %>% group_by(priormed) %>% summarise(mY2 = mean(Y2))
+mY2 <- mean_by_group[["mY2"]]
+mY2 <- round(mY2, 2)
+
+g <- ggplot(data = dat_smart, mapping = aes(x = factor(priormed), y = Y2))
+g <- g + scale_x_discrete(breaks = c(0,1), labels = c("no", "yes"))
+g <- g + ylim(-2,7) + scale_y_continuous(breaks = c(-1,0,1,2,3,4,5,6,7))
+g <- g + labs(x = "Whether the child received medication prior to first-stage intervention", y = "Y2") 
+g <- g + labs(title = "Association between prior medication and end-of-study outcome") 
+g <- g + geom_violin() + geom_point()
+g <- g + annotate("segment", x = 0.75, xend = 1.25, y = mY2[1], yend = mY2[1], colour = "brown",linewidth = 2)
+g <- g + annotate("segment", x = 1.75, xend = 2.25, y = mY2[2], yend = mY2[2], colour = "brown", linewidth = 2)
+g <- g + annotate("text", x = 1.25, y = mY2[1] - 0.25, label = paste("overall mean: ", mY2[1], sep=""), colour = "brown", size = 3)
+g <- g + annotate("text", x = 1.75, y = mY2[2] - 0.25, label = paste("overall mean: ", mY2[2], sep=""), colour = "brown", size = 3)
+g <- g + annotate("text", x = 1, y = -2, label = paste("Pearson Correlation:", u, "(very low association)", sep = " "))
+
+# Reveal plot
+g
+```
+
+### Explore association between *continuous* baseline covariate and *continuous* end-of-study outcome
+
+```{r}
+#| message: false
+#| warning: false
+
+u <- cor(dat_smart$severity_c, dat_smart$Y2)
+u <- round(u, 2)
+g <- ggplot(data = dat_smart, mapping = aes(x = severity_c, y = Y2))
+g <- g + xlim(-3,3) + scale_x_continuous(breaks = c(-3,-2,-1,0,1,2,3))
+g <- g + ylim(-2,7) + scale_y_continuous(breaks = c(-1,0,1,2,3,4,5,6,7))
+g <- g + labs(x = "Baseline severity (centered)", y = "Y2") 
+g <- g + labs(title = "Association between baseline severity and end-of-study outcome") 
+g <- g + geom_smooth(method = "gam") + geom_point()
+g <- g + annotate("text", x = -1, y = -2, label = paste("Pearson Correlation:", u, "(moderate association)", sep = " "))
+
+# Reveal plot
+g
+```
+
+```{r}
+#| message: false
+#| warning: false
+
+u <- cor(dat_smart$Y0_c, dat_smart$Y2)
+u <- round(u, 2)
+g <- ggplot(data = dat_smart, mapping = aes(x = Y0_c, y = Y2))
+g <- g + xlim(-3,3) + scale_x_continuous(breaks = c(-3,-2,-1,0,1,2,3))
+g <- g + ylim(-2,7) + scale_y_continuous(breaks = c(-1,0,1,2,3,4,5,6,7))
+g <- g + labs(x = "Baseline school performance (centered)", y = "Y2") 
+g <- g + labs(title = "Association between baseline school performance and end-of-study outcome") 
+g <- g + geom_smooth(method = "gam") + geom_point()
+g <- g + annotate("text", x = -1, y = -2, label = paste("Pearson Correlation:", u, "(very low association)", sep = " "))
+
+# Reveal plot
+g
+```
+
+## Marginal Model, without adjustment for baseline covariates
+
+```{r}
+#| message: false
+#| warning: false
+
+# -- Load package for data cleaning
+library(dplyr)
+
+# -- Load package for estimating model parameters and obtaining robust SE's
+library(geeM)
+
+# -- Step 1: Create weights
+dat_smart <- dat_smart %>% mutate(design_weights = 2*R + 4*(1-R))
+
+# -- Step 2: Replicate data from responders
+rows_not_to_replicate <- dat_smart %>% filter(R==0)
+rows_to_replicate <- dat_smart %>% filter(R==1)
+plus_one_pseudodata <- rows_to_replicate %>% mutate(A2 = +1)
+minus_one_pseudodata <- rows_to_replicate %>% mutate(A2 = -1)
+
+dat_smart_replicated <- rbind(rows_not_to_replicate,
+                              plus_one_pseudodata,
+                              minus_one_pseudodata)
+
+dat_smart_replicated <- dat_smart_replicated %>% arrange(desc(R), ID, A1, A2)
+
+# -- Step 3: Estimate parameters of our model for the mean of the 
+#            end-of-study outcome
+model <- geem(Y2 ~ A1 + A2 + I(A1*A2), 
+              id = ID, 
+              corstr = "independence",
+              data = dat_smart_replicated, 
+              weights = design_weights)
+
+summary(model)
+
+# -- Step 4: Estimate end-of-study outcome means under each AI 
+#            and pairwise differences
+L <- rbind(
+  # -- These statements get the end-of-study outcome mean under each AI
+  "End-of-study mean: AI#1 (MED, AUGMENT)"    = c(1, -1, -1,  1),
+  "End-of-study mean: AI#2 (BMOD, AUGMENT)"   = c(1,  1, -1, -1),
+  "End-of-study mean: AI#3 (MED, INTENSIFY)"  = c(1, -1,  1, -1),
+  "End-of-study mean: AI#4 (BMOD, INTENSIFY)" = c(1,  1,  1,  1),
+  # -- These statements are to get all pairwise differences
+  "Between groups diff: AI#1 - AI#2"              = c(0, -2,  0,  2),
+  "Between groups diff: AI#1 - AI#3"              = c(0,  0, -2,  2),
+  "Between groups diff: AI#1 - AI#4"              = c(0, -2, -2,  0),
+  "Between groups diff: AI#2 - AI#3"              = c(0,  2, -2,  0),
+  "Between groups diff: AI#2 - AI#4"              = c(0,  0, -2, -2),
+  "Between groups diff: AI#3 - AI#4"              = c(0, -2,  0, -2)
+  )
+
+est_contrasts <- estimate(fit = model, combos = L)
+
+print(est_contrasts)
+```
+
+## Marginal Model, with adjustment for baseline covariates
+
+### Adjustment using a baseline covariate having very low association with end-of-study outcome
+
+```{r}
+#| message: false
+#| warning: false
+
+# -- Load package for data cleaning
+library(dplyr)
+
+# -- Load package for estimating model parameters and obtaining robust SE's
+library(geeM)
+
+# -- Step 1: Create weights
+dat_smart <- dat_smart %>% mutate(design_weights = 2*R + 4*(1-R))
+
+# -- Step 2: Replicate data from responders
+rows_not_to_replicate <- dat_smart %>% filter(R==0)
+rows_to_replicate <- dat_smart %>% filter(R==1)
+plus_one_pseudodata <- rows_to_replicate %>% mutate(A2 = +1)
+minus_one_pseudodata <- rows_to_replicate %>% mutate(A2 = -1)
+
+dat_smart_replicated <- rbind(rows_not_to_replicate,
+                              plus_one_pseudodata,
+                              minus_one_pseudodata)
+
+dat_smart_replicated <- dat_smart_replicated %>% arrange(desc(R), ID, A1, A2)
+
+# -- Step 3: Estimate parameters of our model for the mean of the 
+#            end-of-study outcome
+model_with_baseline <- geem(Y2 ~ priormed_c + A1 + A2 + I(A1*A2), 
+                            id = ID, 
+                            corstr = "independence",
+                            data = dat_smart_replicated, 
+                            weights = design_weights)
+
+summary(model_with_baseline)
+
+# -- Step 4: Estimate end-of-study outcome means under each AI 
+#            and pairwise differences
+L_with_baseline <- rbind(
+  # -- These statements get the end-of-study outcome mean under each AI
+  "End-of-study mean: AI#1 (MED, AUGMENT)"    = c(1, 0, -1, -1,  1),
+  "End-of-study mean: AI#2 (BMOD, AUGMENT)"   = c(1, 0,  1, -1, -1),
+  "End-of-study mean: AI#3 (MED, INTENSIFY)"  = c(1, 0, -1,  1, -1),
+  "End-of-study mean: AI#4 (BMOD, INTENSIFY)" = c(1, 0,  1,  1,  1),
+  # -- These statements are to get all pairwise differences
+  "Diff: AI#1 - AI#2"              = c(0, 0, -2,  0,  2),
+  "Diff: AI#1 - AI#3"              = c(0, 0,  0, -2,  2),
+  "Diff: AI#1 - AI#4"              = c(0, 0, -2, -2,  0),
+  "Diff: AI#2 - AI#3"              = c(0, 0,  2, -2,  0),
+  "Diff: AI#2 - AI#4"              = c(0, 0,  0, -2, -2),
+  "Diff: AI#3 - AI#4"              = c(0, 0, -2,  0, -2)
+  )
+
+est_contrasts_BL <- estimate(fit = model_with_baseline, combos = L_with_baseline)
+print(est_contrasts_BL)
+
+# -- The next line is only necessary because we would like to plot
+#    estimates from the three analyses side-by-side
+est_contrasts_BL1 <- est_contrasts_BL
+```
+
+### Adjustment using a baseline covariate having moderate association with end-of-study outcome
+
+```{r}
+#| message: false
+#| warning: false
+
+# -- Load package for data cleaning
+library(dplyr)
+
+# -- Load package for estimating model parameters and obtaining robust SE's
+library(geeM)
+
+# -- Step 1: Create weights
+dat_smart <- dat_smart %>% mutate(design_weights = 2*R + 4*(1-R))
+
+# -- Step 2: Replicate data from responders
+rows_not_to_replicate <- dat_smart %>% filter(R==0)
+rows_to_replicate <- dat_smart %>% filter(R==1)
+plus_one_pseudodata <- rows_to_replicate %>% mutate(A2 = +1)
+minus_one_pseudodata <- rows_to_replicate %>% mutate(A2 = -1)
+
+dat_smart_replicated <- rbind(rows_not_to_replicate,
+                              plus_one_pseudodata,
+                              minus_one_pseudodata)
+
+dat_smart_replicated <- dat_smart_replicated %>% arrange(desc(R), ID, A1, A2)
+
+# -- Step 3: Estimate parameters of our model for the mean of the 
+#            end-of-study outcome
+model_with_baseline <- geem(Y2 ~ severity_c + A1 + A2 + I(A1*A2), 
+                            id = ID, 
+                            corstr = "independence",
+                            data = dat_smart_replicated, 
+                            weights = design_weights)
+
+summary(model_with_baseline)
+
+# -- Step 4: Estimate end-of-study outcome means under each AI 
+#            and pairwise differences
+L_with_baseline <- rbind(
+  # -- These statements get the end-of-study outcome mean under each AI
+  "End-of-study mean: AI#1 (MED, AUGMENT)"    = c(1, 0, -1, -1,  1),
+  "End-of-study mean: AI#2 (BMOD, AUGMENT)"   = c(1, 0,  1, -1, -1),
+  "End-of-study mean: AI#3 (MED, INTENSIFY)"  = c(1, 0, -1,  1, -1),
+  "End-of-study mean: AI#4 (BMOD, INTENSIFY)" = c(1, 0,  1,  1,  1),
+  # -- These statements are to get all pairwise differences
+  "Diff: AI#1 - AI#2"              = c(0, 0, -2,  0,  2),
+  "Diff: AI#1 - AI#3"              = c(0, 0,  0, -2,  2),
+  "Diff: AI#1 - AI#4"              = c(0, 0, -2, -2,  0),
+  "Diff: AI#2 - AI#3"              = c(0, 0,  2, -2,  0),
+  "Diff: AI#2 - AI#4"              = c(0, 0,  0, -2, -2),
+  "Diff: AI#3 - AI#4"              = c(0, 0, -2,  0, -2)
+  )
+
+est_contrasts_BL <- estimate(fit = model_with_baseline, combos = L_with_baseline)
+print(est_contrasts_BL)
+
+# -- The next line is only necessary because we would like to plot
+#    estimates from the three analyses side-by-side
+est_contrasts_BL2 <- est_contrasts_BL
+```
+
+### Compare estimates and confidence limits across all models
+
+```{r}
+#| message: false
+#| warning: false
+
+# -- Note: The following code snippet employs advanced R coding concepts;
+#          you may focus on the meaning of the output plot, rather than the 
+#          specifics of the code itself, without losing understanding of
+#          the basic workflow
+
+# -- Convert matrix into data frame because ggplot does not permit matrix inputs
+dat_plot <- data.frame(est_contrasts)
+dat_plot_bl1 <- data.frame(est_contrasts_BL1)
+dat_plot_bl2 <- data.frame(est_contrasts_BL2)
+
+# -- We strongly prefer using syntactic names for data frames
+colnames(dat_plot) <- c("estimate", "lower", "upper", "stderr", "pval")
+dat_plot[["contrast_labels"]] <- row.names(dat_plot)
+row.names(dat_plot) <- NULL
+
+colnames(dat_plot_bl1) <- c("estimate", "lower", "upper", "stderr", "pval")
+dat_plot_bl1[["contrast_labels"]] <- row.names(dat_plot_bl1)
+row.names(dat_plot_bl1) <- NULL
+
+colnames(dat_plot_bl2) <- c("estimate", "lower", "upper", "stderr", "pval")
+dat_plot_bl2[["contrast_labels"]] <- row.names(dat_plot_bl2)
+row.names(dat_plot_bl2) <- NULL
+
+# -- Grab only the rows you will plot
+dat_plot <- dat_plot %>% filter(grepl(pattern = "End-of-study mean:", x = contrast_labels, fixed = TRUE)) 
+dat_plot_bl1 <- dat_plot_bl1 %>% filter(grepl(pattern = "End-of-study mean:", x = contrast_labels, fixed = TRUE)) 
+dat_plot_bl2 <- dat_plot_bl2 %>% filter(grepl(pattern = "End-of-study mean:", x = contrast_labels, fixed = TRUE)) 
+
+# -- Start building a graph
+g <- ggplot(data = dat_plot, mapping = aes(x = factor(contrast_labels), y = estimate))
+
+g <- g + scale_y_continuous(limits = c(2,5), breaks = c(2,2.5,3,3.5,4,4.5,5))
+g <- g + scale_x_continuous(breaks = c(1,2,3,4), labels = c("AI#1 (MED, AUGMENT)", "AI#2 (BMOD, AUGMENT)", "AI#3 (MED, INTENSIFY)", "AI#4 (BMOD, INTENSIFY)"))
+g <- g + labs(x = "", y = "")
+g <- g + labs(title = "End-of-study means and 95% CI's under each adaptive intervention", subtitle = "solid line: no adjustment for baseline covariates\ndashed line: with adjustment -- low association\ndotted line: with adjustment -- moderate association")
+
+# -- No adjustment for baseline covariates
+g <- g + annotate("pointrange", x = 1, y = dat_plot[["estimate"]][1], ymin = dat_plot[["lower"]][1], ymax = dat_plot[["upper"]][1], colour = "aquamarine3", linewidth = 2, linetype = 1)
+g <- g + annotate("pointrange", x = 2, y = dat_plot[["estimate"]][2], ymin = dat_plot[["lower"]][2], ymax = dat_plot[["upper"]][2], colour = "coral", linewidth = 2, linetype = 1)
+g <- g + annotate("pointrange", x = 3, y = dat_plot[["estimate"]][3], ymin = dat_plot[["lower"]][3], ymax = dat_plot[["upper"]][3], colour = "gold", linewidth = 2, linetype = 1)
+g <- g + annotate("pointrange", x = 4, y = dat_plot[["estimate"]][4], ymin = dat_plot[["lower"]][4], ymax = dat_plot[["upper"]][4], colour = "slateblue2", linewidth = 2, linetype = 1)
+
+g <- g + annotate("segment", x = 0.9, xend = 1.1, y = dat_plot[["upper"]][1], yend = dat_plot[["upper"]][1], colour = "aquamarine3", linewidth = 2, linetype = 1)
+g <- g + annotate("segment", x = 1.9, xend = 2.1, y = dat_plot[["upper"]][2], yend = dat_plot[["upper"]][2], colour = "coral", linewidth = 2, linetype = 1)
+g <- g + annotate("segment", x = 2.9, xend = 3.1, y = dat_plot[["upper"]][3], yend = dat_plot[["upper"]][3], colour = "gold", linewidth = 2, linetype = 1)
+g <- g + annotate("segment", x = 3.9, xend = 4.1, y = dat_plot[["upper"]][4], yend = dat_plot[["upper"]][4], colour = "slateblue2", linewidth = 2, linetype = 1)
+
+g <- g + annotate("segment", x = 0.9, xend = 1.1, y = dat_plot[["lower"]][1], yend = dat_plot[["lower"]][1], colour = "aquamarine3", linewidth = 2, linetype = 1)
+g <- g + annotate("segment", x = 1.9, xend = 2.1, y = dat_plot[["lower"]][2], yend = dat_plot[["lower"]][2], colour = "coral", linewidth = 2, linetype = 1)
+g <- g + annotate("segment", x = 2.9, xend = 3.1, y = dat_plot[["lower"]][3], yend = dat_plot[["lower"]][3], colour = "gold", linewidth = 2, linetype = 1)
+g <- g + annotate("segment", x = 3.9, xend = 4.1, y = dat_plot[["lower"]][4], yend = dat_plot[["lower"]][4], colour = "slateblue2", linewidth = 2, linetype = 1)
+
+g <- g + annotate("point", x = c(1, 2, 3, 4), y = dat_plot[["estimate"]], size = 8, colour = c("aquamarine3","coral","gold","slateblue2"))
+
+# -- Adjust for baseline covariates
+g <- g + annotate("pointrange", x = 1.2, y = dat_plot_bl1[["estimate"]][1], ymin = dat_plot_bl1[["lower"]][1], ymax = dat_plot_bl1[["upper"]][1], colour = "aquamarine3", linewidth = 2, linetype = 2)
+g <- g + annotate("pointrange", x = 2.2, y = dat_plot_bl1[["estimate"]][2], ymin = dat_plot_bl1[["lower"]][2], ymax = dat_plot_bl1[["upper"]][2], colour = "coral", linewidth = 2, linetype = 2)
+g <- g + annotate("pointrange", x = 3.2, y = dat_plot_bl1[["estimate"]][3], ymin = dat_plot_bl1[["lower"]][3], ymax = dat_plot_bl1[["upper"]][3], colour = "gold", linewidth = 2, linetype = 2)
+g <- g + annotate("pointrange", x = 4.2, y = dat_plot_bl1[["estimate"]][4], ymin = dat_plot_bl1[["lower"]][4], ymax = dat_plot_bl1[["upper"]][4], colour = "slateblue2", linewidth = 2, linetype = 2)
+
+g <- g + annotate("segment", x = 1.1, xend = 1.3, y = dat_plot_bl1[["upper"]][1], yend = dat_plot_bl1[["upper"]][1], colour = "aquamarine3", linewidth = 2, linetype = 1)
+g <- g + annotate("segment", x = 2.1, xend = 2.3, y = dat_plot_bl1[["upper"]][2], yend = dat_plot_bl1[["upper"]][2], colour = "coral", linewidth = 2, linetype = 1)
+g <- g + annotate("segment", x = 3.1, xend = 3.3, y = dat_plot_bl1[["upper"]][3], yend = dat_plot_bl1[["upper"]][3], colour = "gold", linewidth = 2, linetype = 1)
+g <- g + annotate("segment", x = 4.1, xend = 4.3, y = dat_plot_bl1[["upper"]][4], yend = dat_plot_bl1[["upper"]][4], colour = "slateblue2", linewidth = 2, linetype = 1)
+
+g <- g + annotate("segment", x = 1.1, xend = 1.3, y = dat_plot_bl1[["lower"]][1], yend = dat_plot_bl1[["lower"]][1], colour = "aquamarine3", linewidth = 2, linetype = 1)
+g <- g + annotate("segment", x = 2.1, xend = 2.3, y = dat_plot_bl1[["lower"]][2], yend = dat_plot_bl1[["lower"]][2], colour = "coral", linewidth = 2, linetype = 1)
+g <- g + annotate("segment", x = 3.1, xend = 3.3, y = dat_plot_bl1[["lower"]][3], yend = dat_plot_bl1[["lower"]][3], colour = "gold", linewidth = 2, linetype = 1)
+g <- g + annotate("segment", x = 4.1, xend = 4.3, y = dat_plot_bl1[["lower"]][4], yend = dat_plot_bl1[["lower"]][4], colour = "slateblue2", linewidth = 2, linetype = 1)
+
+g <- g + annotate("point", x = c(1.2, 2.2, 3.2, 4.2), y = dat_plot_bl1[["estimate"]], size = 8, colour = c("aquamarine3","coral","gold","slateblue2"))
+
+# -- Adjust for baseline covariates
+g <- g + annotate("pointrange", x = 1.4, y = dat_plot_bl2[["estimate"]][1], ymin = dat_plot_bl2[["lower"]][1], ymax = dat_plot_bl2[["upper"]][1], colour = "aquamarine3", linewidth = 2, linetype = 3)
+g <- g + annotate("pointrange", x = 2.4, y = dat_plot_bl2[["estimate"]][2], ymin = dat_plot_bl2[["lower"]][2], ymax = dat_plot_bl2[["upper"]][2], colour = "coral", linewidth = 2, linetype = 3)
+g <- g + annotate("pointrange", x = 3.4, y = dat_plot_bl2[["estimate"]][3], ymin = dat_plot_bl2[["lower"]][3], ymax = dat_plot_bl2[["upper"]][3], colour = "gold", linewidth = 2, linetype = 3)
+g <- g + annotate("pointrange", x = 4.4, y = dat_plot_bl2[["estimate"]][4], ymin = dat_plot_bl2[["lower"]][4], ymax = dat_plot_bl2[["upper"]][4], colour = "slateblue2", linewidth = 2, linetype = 3)
+
+g <- g + annotate("segment", x = 1.3, xend = 1.5, y = dat_plot_bl2[["upper"]][1], yend = dat_plot_bl2[["upper"]][1], colour = "aquamarine3", linewidth = 2, linetype = 1)
+g <- g + annotate("segment", x = 2.3, xend = 2.5, y = dat_plot_bl2[["upper"]][2], yend = dat_plot_bl2[["upper"]][2], colour = "coral", linewidth = 2, linetype = 1)
+g <- g + annotate("segment", x = 3.3, xend = 3.5, y = dat_plot_bl2[["upper"]][3], yend = dat_plot_bl2[["upper"]][3], colour = "gold", linewidth = 2, linetype = 1)
+g <- g + annotate("segment", x = 4.3, xend = 4.5, y = dat_plot_bl2[["upper"]][4], yend = dat_plot_bl2[["upper"]][4], colour = "slateblue2", linewidth = 2, linetype = 1)
+
+g <- g + annotate("segment", x = 1.3, xend = 1.5, y = dat_plot_bl2[["lower"]][1], yend = dat_plot_bl2[["lower"]][1], colour = "aquamarine3", linewidth = 2, linetype = 1)
+g <- g + annotate("segment", x = 2.3, xend = 2.5, y = dat_plot_bl2[["lower"]][2], yend = dat_plot_bl2[["lower"]][2], colour = "coral", linewidth = 2, linetype = 1)
+g <- g + annotate("segment", x = 3.3, xend = 3.5, y = dat_plot_bl2[["lower"]][3], yend = dat_plot_bl2[["lower"]][3], colour = "gold", linewidth = 2, linetype = 1)
+g <- g + annotate("segment", x = 4.3, xend = 4.5, y = dat_plot_bl2[["lower"]][4], yend = dat_plot_bl2[["lower"]][4], colour = "slateblue2", linewidth = 2, linetype = 1)
+
+g <- g + annotate("point", x = c(1.4, 2.4, 3.4, 4.4), y = dat_plot_bl2[["estimate"]], size = 8, colour = c("aquamarine3","coral","gold","slateblue2"))
+```
+
+```{r, fig.width=11, fig.height=7}
+#| message: false
+#| warning: false
+
+# -- Reveal plot
+g
+```
